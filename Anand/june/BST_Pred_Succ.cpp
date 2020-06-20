@@ -1,3 +1,5 @@
+/* BST Prdecessor and Successor COde*/
+
 #include <iostream>
 #include <string>
 
@@ -9,7 +11,7 @@ struct tree
     tree*  left;
     tree* right;
     tree(){left=right=NULL;}
-}
+};
 
 tree* findPredecessor(tree* root,int key)
 {
@@ -17,37 +19,33 @@ tree* findPredecessor(tree* root,int key)
         return NULL;
     tree* pred = NULL;
     
-    if(root->val >key)
+    while(root && root->val >= key)
     {
-        pred =findPredecessor(root->left,key);
+        root=root->left;
     }
-    else if(root->val == key)
-    {
-        if(root->left)
-            return root->left;
-    }
-    else if(root->right)
-    {
-        pred =findPredecessor(root->right,key);
-    }
-    else
+    while(root && root->val < key)
     {
         pred = root;
+        root = root->right;
     }
     return pred;
 }
 
-tree* findSuccessor(tree* root,int key,bool found=false)
+tree* findSuccessor(tree* root,int key)
 {
     if(!root)
         return NULL;
-    tree* suck = findPredecessor(root->left,key,found);
-    if(found && suck)
-        return suck;
-    else if (found)
-        return root;
-    if(root->val == key) found =true;
-    return findPredecessor(root->right,key,found);
+    tree* suck = NULL;
+    while(root && root->val <= key)
+    {
+        root = root->right;
+    }
+    while(root && root->val > key)
+    {
+        pred = root;
+        root=root->left;
+    }
+    return suck;
 }
 
 
@@ -55,5 +53,6 @@ main()
 {
     //BST pointer given
     tree* bst = given;
-    findPredecessor(bst);
+    findPredecessor(bst,key);
+    findSuccessor(bst,key);
 }

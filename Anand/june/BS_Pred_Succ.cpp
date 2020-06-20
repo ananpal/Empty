@@ -1,3 +1,5 @@
+/*Binary Tree find pred and successor*/
+
 #include <iostream>
 #include <string>
 
@@ -9,7 +11,7 @@ struct tree
     tree*  left;
     tree* right;
     tree(){left=right=NULL;}
-}
+};
 
 tree* findPredecessor(tree* root,int key)
 {
@@ -49,9 +51,11 @@ tree* findSuccessor(tree* root,int key)
     return findSuccessor(root,key,found);
 
 }
+
 main()
 {
-    //BST pointer given
+    //BT pointer given
     tree* bst = given;
-    findPredecessor(bst);
+    findPredecessor(bst,key);
+    findSuccessor(bst,key);
 }
